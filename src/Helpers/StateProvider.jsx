@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types'
 
-const StateContext = createContext();
+export const StateContext = createContext();
 
 export const StateProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, initialState);
@@ -12,7 +13,9 @@ export const StateProvider = ({ children }) => {
 	)
 };
 
-export const useStateValue = () => useContext(StateContext);
+StateProvider.propTypes = {
+	children: PropTypes.node,
+}
 
 const initialState = {
     current_page: 'home',
